@@ -1,19 +1,19 @@
 ﻿# Clean Code PHP
 
-## Table of Contents
+## فهرست مندرجات
 
-  1. [Introduction](#introduction)
-  2. [Variables](#variables)
-     * [Use meaningful and pronounceable variable names](#use-meaningful-and-pronounceable-variable-names)
-     * [Use the same vocabulary for the same type of variable](#use-the-same-vocabulary-for-the-same-type-of-variable)
-     * [Use searchable names (part 1)](#use-searchable-names-part-1)
-     * [Use searchable names (part 2)](#use-searchable-names-part-2)
+  1. [مقدمه](#introduction)
+  2. [متغیر ها](#variables)
+     * [استفاده از نام های معنی دار و قابل تلفظ برای نام گذاری متغیر ها](#use-meaningful-and-pronounceable-variable-names)
+     * [استفاده از واژگان مشابه برای همان نوع متغیر](#use-the-same-vocabulary-for-the-same-type-of-variable)
+     * [ استفاده از واژگان قابل جستجو (قسمت اول)](#use-searchable-names-part-1)
+     * [ استفاده از واژگان قابل جستجو (قسمت دوم)](#use-searchable-names-part-2)
      * [Use explanatory variables](#use-explanatory-variables)
-     * [Avoid nesting too deeply and return early (part 1)](#avoid-nesting-too-deeply-and-return-early-part-1)
-     * [Avoid nesting too deeply and return early (part 2)](#avoid-nesting-too-deeply-and-return-early-part-2)
-     * [Avoid Mental Mapping](#avoid-mental-mapping)
-     * [Don't add unneeded context](#dont-add-unneeded-context)
-     * [Use default arguments instead of short circuiting or conditionals](#use-default-arguments-instead-of-short-circuiting-or-conditionals)
+     * [اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت اول)](#avoid-nesting-too-deeply-and-return-early-part-1)
+     * [اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت دوم)](#avoid-nesting-too-deeply-and-return-early-part-2)
+     * [اجتناب از نقشه ذهنی](#avoid-mental-mapping)
+     * [محتوا غیر ضروری را اضافه نکنید](#dont-add-unneeded-context)
+     * [استفاده از آرگومان های پیش فرض به جای شرط ها و short circuiting](#use-default-arguments-instead-of-short-circuiting-or-conditionals)
   3. [Comparison](#comparison)
      * [Use identical comparison](#use-identical-comparison)
   4. [Functions](#functions)
