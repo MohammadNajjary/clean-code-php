@@ -1,88 +1,108 @@
-﻿# Clean Code PHP
+﻿<h1 dir="rtl">Clean Code PHP</h1>
 
-## فهرست مندرجات
+<h2  dir="rtl"><a id="table-of-contents" class="anchor" href="#table-of-contents"></a>فهرست مندرجات</h2>
+<ol dir="rtl">
+<li><a href="#introduction">مقدمه</a></li>
+<li><a href="#variables">متغیر ها</a><ul>
+<li><a href="#use-meaningful-and-pronounceable-variable-names">استفاده از نام های معنی دار و قابل تلفظ برای نام گذاری متغیر ها</a></li>
+<li><a href="#use-the-same-vocabulary-for-the-same-type-of-variable">استفاده از واژگان مشابه برای همان نوع متغیر</a></li>
+<li><a href="#use-searchable-names-part-1"> استفاده از واژگان قابل جستجو (قسمت اول)</a></li>
+<li><a href="#use-searchable-names-part-2"> استفاده از واژگان قابل جستجو (قسمت دوم)</a></li>
+<li><a href="#use-explanatory-variables">استفاده از متفیر های توضیح دهنده</a></li>
+<li><a href="#avoid-nesting-too-deeply-and-return-early-part-1">اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت اول)</a></li>
+<li><a href="#avoid-nesting-too-deeply-and-return-early-part-2">اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت دوم)</a></li>
+<li><a href="#avoid-mental-mapping">اجتناب از نقشه ذهنی</a></li>
+<li><a href="#dont-add-unneeded-context">محتوا غیر ضروری را اضافه نکنید</a></li>
+<li><a href="#use-default-arguments-instead-of-short-circuiting-or-conditionals">استفاده از آرگومان های پیش فرض به جای شرط ها و short circuiting</a></li>
+</ul>
+</li>
+<li><a href="#comparison">مقایسه</a><ul>
+<li><a href="#use-identical-comparison">استفاده از identical comparison </a></li>
+</ul>
+</li>
+<li><a href="#functions">توابع</a><ul>
+<li><a href="#function-arguments-2-or-fewer-ideally">آرگومان های توابع ( ۲ تا یا در حالت ایده آل کمتر)</a></li>
+<li><a href="#functions-should-do-one-thing">توابع باید یک چیز را انجام بدهند</a></li>
+<li><a href="#function-names-should-say-what-they-do">نام توابع باید بگوید چه کاری انجام می دهد</a></li>
+<li><a href="#functions-should-only-be-one-level-of-abstraction">توابع باید تنها یک سطح انتزاع داشته باشند</a></li>
+<li><a href="#dont-use-flags-as-function-parameters">از flags  پارمترهای در توابع استفاده نکنید</a></li>
+<li><a href="#avoid-side-effects">اجتناب از اثرات جانبی</a></li>
+<li><a href="#dont-write-to-global-functions">توابع عمومی ننویسید</a></li>
+<li><a href="#dont-use-a-singleton-pattern">از دیزاین پترن سینگلتون استفاده نکنید</a></li>
+<li><a href="#encapsulate-conditionals">کپسوله کردن شرط ها</a></li>
+<li><a href="#avoid-negative-conditionals">اجتناب از شرط های منفی</a></li>
+<li><a href="#avoid-conditionals">اجتناب از شرط ها</a></li>
+<li><a href="#avoid-type-checking-part-1">اجتناب از type-checking (قسمت اول)</a></li>
+<li><a href="#avoid-type-checking-part-2">اجتناب از type-checking (قسمت دوم)</a></li>
+<li><a href="#remove-dead-code">کدهای مرد را پاک کنید</a></li>
+</ul>
+</li>
+<li><a href="#objects-and-data-structures">اشیا و ساختارهای داده </a><ul>
+<li><a href="#use-object-encapsulation">استفاده از کپسوله سازی اشیا</a></li>
+<li><a href="#make-objects-have-privateprotected-members">اشیایی بسازید که اعضای private/protected داشته باشند</a></li>
+</ul>
+</li>
+<li><a href="#classes">کلاس ها</a><ul>
+<li><a href="#prefer-composition-over-inheritance">ترکیب را به ارث بری ترجیح بدهید</a></li>
+<li><a href="#avoid-fluent-interfaces">اجتناب از fluent interfaces </a></li>
+<li><a href="#prefer-final-classes">ترجیح تان کلاس های <code>final</code>  باشند</a></li>
+</ul>
+</li>
+<li><a href="#solid">SOLID</a><ul>
+<li><a href="#single-responsibility-principle-srp"> اصل Single Responsibility (SRP)</a></li>
+<li><a href="#openclosed-principle-ocp">Open/Closed اصل (OCP)</a></li>
+<li><a href="#liskov-substitution-principle-lsp">Liskov Substitution اصل (LSP)</a></li>
+<li><a href="#interface-segregation-principle-isp">Interface Segregation اصل (ISP)</a></li>
+<li><a href="#dependency-inversion-principle-dip">Dependency Inversion اصل (DIP)</a></li>
+</ul>
+</li>
+<li><a href="#dont-repeat-yourself-dry">خودت را تکرار نکن!</a></li>
+<li><a href="#translations">ترجمه ها</a></li>
+</ol>
+ 
 
-  1. [مقدمه](#introduction)
-  2. [متغیر ها](#variables)
-     * [استفاده از نام های معنی دار و قابل تلفظ برای نام گذاری متغیر ها](#use-meaningful-and-pronounceable-variable-names)
-     * [استفاده از واژگان مشابه برای همان نوع متغیر](#use-the-same-vocabulary-for-the-same-type-of-variable)
-     * [ استفاده از واژگان قابل جستجو (قسمت اول)](#use-searchable-names-part-1)
-     * [ استفاده از واژگان قابل جستجو (قسمت دوم)](#use-searchable-names-part-2)
-     * [Use explanatory variables](#use-explanatory-variables)
-     * [اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت اول)](#avoid-nesting-too-deeply-and-return-early-part-1)
-     * [اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت دوم)](#avoid-nesting-too-deeply-and-return-early-part-2)
-     * [اجتناب از نقشه ذهنی](#avoid-mental-mapping)
-     * [محتوا غیر ضروری را اضافه نکنید](#dont-add-unneeded-context)
-     * [استفاده از آرگومان های پیش فرض به جای شرط ها و short circuiting](#use-default-arguments-instead-of-short-circuiting-or-conditionals)
-  3. [Comparison](#comparison)
-     * [Use identical comparison](#use-identical-comparison)
-  4. [Functions](#functions)
-     * [Function arguments (2 or fewer ideally)](#function-arguments-2-or-fewer-ideally)
-     * [Functions should do one thing](#functions-should-do-one-thing)
-     * [Function names should say what they do](#function-names-should-say-what-they-do)
-     * [Functions should only be one level of abstraction](#functions-should-only-be-one-level-of-abstraction)
-     * [Don't use flags as function parameters](#dont-use-flags-as-function-parameters)
-     * [Avoid Side Effects](#avoid-side-effects)
-     * [Don't write to global functions](#dont-write-to-global-functions)
-     * [Don't use a Singleton pattern](#dont-use-a-singleton-pattern)
-     * [Encapsulate conditionals](#encapsulate-conditionals)
-     * [Avoid negative conditionals](#avoid-negative-conditionals)
-     * [Avoid conditionals](#avoid-conditionals)
-     * [Avoid type-checking (part 1)](#avoid-type-checking-part-1)
-     * [Avoid type-checking (part 2)](#avoid-type-checking-part-2)
-     * [Remove dead code](#remove-dead-code)
-  5. [Objects and Data Structures](#objects-and-data-structures)
-     * [Use object encapsulation](#use-object-encapsulation)
-     * [Make objects have private/protected members](#make-objects-have-privateprotected-members)
-  6. [Classes](#classes)
-     * [Prefer composition over inheritance](#prefer-composition-over-inheritance)
-     * [Avoid fluent interfaces](#avoid-fluent-interfaces)
-     * [Prefer `final` classes](#prefer-final-classes)
-  7. [SOLID](#solid)
-     * [Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)
-     * [Open/Closed Principle (OCP)](#openclosed-principle-ocp)
-     * [Liskov Substitution Principle (LSP)](#liskov-substitution-principle-lsp)
-     * [Interface Segregation Principle (ISP)](#interface-segregation-principle-isp)
-     * [Dependency Inversion Principle (DIP)](#dependency-inversion-principle-dip)
-  8. [Don’t repeat yourself (DRY)](#dont-repeat-yourself-dry)
-  9. [Translations](#translations)
+<h2 dir="rtl"> مقدمه </h2>
 
-## Introduction
+<p dir="rtl">اصول مهندسی نرم افزار، از کتاب <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><em>Clean Code</em></a>,
+ نوشته C. Martin، برای PHP سازگار شده است.این یک راهنما ساده نیست.این یک  راهنما برای تولید نرم افزار های با قابلیت خوانایی،استفاده مجدد، و قابل باز سازی در php  می باشد</p>
 
-Software engineering principles, from Robert C. Martin's book
-[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
-adapted for PHP. This is not a style guide. It's a guide to producing
-readable, reusable, and refactorable software in PHP.
 
-Not every principle herein has to be strictly followed, and even fewer will be universally 
-agreed upon. These are guidelines and nothing more, but they are ones codified over many 
-years of collective experience by the authors of *Clean Code*.
+<p dir="rtl">
+هیچ اصل و اصولی در اینجا الزامی نیست و به صورت عمومی توافقی نشده است.اینها یکسری دستور العمل هست نه بیشتر اما تمام آن بر اساس  تجربه چندین ساله جمعی از برنامه نویسان توسط نویسندگان کتاب
+  <em>clean code</em>
+  نوشته شده است. 
+</p>
 
-Inspired from [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
+<p dir="rtl">
+الهام گرفته از  <a href="https://github.com/ryanmcdermott/clean-code-javascript">clean-code-javascript</a>
+</p>
+<p dir="rtl">اگر چه بسیار از توسعه دهندگان هنوز از php ۵ استفاده می کنند ولی بیشتر مثال های ما در php 7.1 به بالا کار میکند.</p>
+<h2 dir="rtl">متغیرها</h2>
 
-Although many developers still use PHP 5, most of the examples in this article only work with PHP 7.1+.
-
-## Variables
-
-### Use meaningful and pronounceable variable names
-
-**Bad:**
+<h3 id="use-meaningful-and-pronounceable-variable-names" dir="rtl">
+<a class="anchor" name="use-meaningful-and-pronounceable-variable-names" href="#use-meaningful-and-pronounceable-variable-names">
+<span class="octicon octicon-link"></span></a>
+استفاده از نام های معنی دار و قابل تلفظ برای نام گذاری متغیر ها</h3>
+<p  dir="rtl"><strong>بد:</strong></p>
 
 ```php
 $ymdstr = $moment->format('y-m-d');
 ```
 
-**Good:**
+<p  dir="rtl"><strong>خوب:</strong></p>
+
 
 ```php
 $currentDate = $moment->format('y-m-d');
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Use the same vocabulary for the same type of variable
+<h3 id="use-the-same-vocabulary-for-the-same-type-of-variable" dir="rtl">
+<a class="anchor" name="use-the-same-vocabulary-for-the-same-type-of-variable" href="#use-the-same-vocabulary-for-the-same-type-of-variable">
+<span class="octicon octicon-link"></span></a>استفاده از واژگان مشابه برای همان نوع متغیر</h3>
 
-**Bad:**
+<p  dir="rtl"><strong>بد:</strong></p>
 
 ```php
 getUserInfo();
@@ -91,46 +111,49 @@ getUserRecord();
 getUserProfile();
 ```
 
-**Good:**
+<p  dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 getUser();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Use searchable names (part 1)
+<h3 dir="rtl" id="use-searchable-names-part-1">
+<a class="anchor" name="use-searchable-names-part-1" href="#use-searchable-names-part-1">
+<span class="octicon octicon-link"></span></a>استفاده از واژگان قابل جستجو (قسمت اول)</h3>
 
-We will read more code than we will ever write. It's important that the code we do write is 
-readable and searchable. By *not* naming variables that end up being meaningful for 
-understanding our program, we hurt our readers.
-Make your names searchable.
+<p die="rtl">
+ما بیشتر از آن که کد بنویسیم، کدها را میخوانیم.خیلی مهم  می باشد کد هایی که ما مینویسیم  با خوانایی بالا و قابل جستجو باشند. ما با انتخاب نام های نامفهوم و غیرقابل فهم در برنامه های مان به خوانایی کد آسیب میزنم.نام ها را  قابل جستجو انتخاب کنید.
+</p>
 
-**Bad:**
+<p  dir="rtl"><strong>بد:</strong></p>
 
 ```php
-// What the heck is 448 for?
+//عدد  ۴۴۸ برای چی هست ?
 $result = $serializer->serialize($data, 448);
 ```
 
-**Good:**
+<p  dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 $json = $serializer->serialize($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 ```
 
-### Use searchable names (part 2)
+<h3 dir="rtl" id="use-searchable-names-part-2">
+<a class="anchor" name="use-searchable-names-part-2" href="#use-searchable-names-part-2">
+<span class="octicon octicon-link"></span></a>استفاده از واژگان قابل جستجو (قسمت دوم)</h3>
 
-**Bad:**
+<p  dir="rtl"><strong>بد:</strong></p>
 
 ```php
-// What the heck is 4 for?
+// عدد ۴ برای چی هست?
 if ($user->access & 4) {
     // ...
 }
 ```
 
-**Good:**
+<p  dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 class User
@@ -146,7 +169,7 @@ if ($user->access & User::ACCESS_UPDATE) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
 ### Use explanatory variables
 
