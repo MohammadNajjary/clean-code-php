@@ -1,6 +1,7 @@
 ﻿<h1 dir="rtl">Clean Code PHP</h1>
 
 <h2  dir="rtl"><a id="table-of-contents" class="anchor" href="#table-of-contents"></a>فهرست مندرجات</h2>
+
 <ol dir="rtl">
 <li><a href="#introduction">مقدمه</a></li>
 <li><a href="#variables">متغیر ها</a><ul>
@@ -61,7 +62,10 @@
 </ol>
  
 
-<h2 dir="rtl"> مقدمه </h2>
+<h3 id="variables" dir="rtl"><a class="anchor" name="variables" href="#variables"><span class="octicon octicon-link"></span></a>
+<a class="anchor" name="variables" href="#variables">
+<span class="octicon octicon-link"></span></a>
+مقدمه</h3>
 
 <p dir="rtl">اصول مهندسی نرم افزار، از کتاب <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><em>Clean Code</em></a>,
  نوشته C. Martin، برای PHP سازگار شده است.این یک راهنما ساده نیست.این یک  راهنما برای تولید نرم افزار های با قابلیت خوانایی،استفاده مجدد، و قابل باز سازی در php  می باشد</p>
@@ -77,7 +81,11 @@
 الهام گرفته از  <a href="https://github.com/ryanmcdermott/clean-code-javascript">clean-code-javascript</a>
 </p>
 <p dir="rtl">اگر چه بسیار از توسعه دهندگان هنوز از php ۵ استفاده می کنند ولی بیشتر مثال های ما در php 7.1 به بالا کار میکند.</p>
-<h2 dir="rtl">متغیرها</h2>
+
+<h3 id="introduction" dir="rtl"><a class="anchor" name="introduction" href="#introduction"><span class="octicon octicon-link"></span></a>
+<a class="anchor" name="introduction" href="#introduction">
+<span class="octicon octicon-link"></span></a>
+متغیر ها</h3>
 
 <h3 id="use-meaningful-and-pronounceable-variable-names" dir="rtl">
 <a class="anchor" name="use-meaningful-and-pronounceable-variable-names" href="#use-meaningful-and-pronounceable-variable-names">
