@@ -13,8 +13,8 @@
 <li><a href="#avoid-nesting-too-deeply-and-return-early-part-1">اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت اول)</a></li>
 <li><a href="#avoid-nesting-too-deeply-and-return-early-part-2">اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت دوم)</a></li>
 <li><a href="#avoid-mental-mapping">اجتناب از نقشه ذهنی</a></li>
-<li><a href="#dont-add-unneeded-context">محتوا غیر ضروری را اضافه نکنید</a></li>
-<li><a href="#use-default-arguments-instead-of-short-circuiting-or-conditionals">استفاده از آرگومان های پیش فرض به جای شرط ها و short circuiting</a></li>
+<li><a href="#don-t-add-unneeded-context">محتوا غیر ضروری را اضافه نکنید</a></li>
+<li><a href="#use-default-arguments-instead-of-short-circuiting-or-conditionals">استفاده از آرگومان های پیش فرض به جای شرط ها یا short circuiting</a></li>
 </ul>
 </li>
 <li><a href="#comparison">مقایسه</a><ul>
@@ -179,24 +179,29 @@ if ($user->access & User::ACCESS_UPDATE) {
 
 <p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Use explanatory variables
+<h3 id="use-explanatory-variables" dir="rtl">
+<a class="anchor" name="use-explanatory-variables" href="#use-explanatory-variables">
+<span class="octicon octicon-link"></span></a>استفاده از متفیر های توضیح دهنده</h3>
 
-**Bad:**
+<p  dir="rtl"><strong>بد:</strong></p>
+
 
 ```php
-$address = 'One Infinite Loop, Cupertino 95014';
+$address = 'bozorgmeher st , valiasr st,tehran';
 $cityZipCodeRegex = '/^[^,]+,\s*(.+?)\s*(\d{5})$/';
 preg_match($cityZipCodeRegex, $address, $matches);
 
 saveCityZipCode($matches[1], $matches[2]);
 ```
 
-**Not bad:**
+<p dir="rtl">
+   <strong>بدک نیست:</strong>
+</p>
 
-It's better, but we are still heavily dependent on regex.
+<p dir="rtl">این بهتر شد ولی ما هنوز وابستگی شدیدی به regex  داریم.</p>
 
 ```php
-$address = 'One Infinite Loop, Cupertino 95014';
+$address = 'bozorgmeher st , valiasr st,tehran';
 $cityZipCodeRegex = '/^[^,]+,\s*(.+?)\s*(\d{5})$/';
 preg_match($cityZipCodeRegex, $address, $matches);
 
@@ -204,26 +209,27 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($city, $zipCode);
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
-Decrease dependence on regex by naming subpatterns.
+<p dir="rtl">با نامگذاری subpattern ها وابستگی به regex را کاهش دادیم.</p>
 
 ```php
-$address = 'One Infinite Loop, Cupertino 95014';
+$address = 'bozorgmeher st , valiasr st,tehran';
 $cityZipCodeRegex = '/^[^,]+,\s*(?<city>.+?)\s*(?<zipCode>\d{5})$/';
 preg_match($cityZipCodeRegex, $address, $matches);
 
 saveCityZipCode($matches['city'], $matches['zipCode']);
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid nesting too deeply and return early (part 1)
+<h3 id="avoid-nesting-too-deeply-and-return-early-part-1"  dir="rtl">
+<a class="anchor" name="avoid-nesting-too-deeply-and-return-early-part-1" href="#avoid-nesting-too-deeply-and-return-early-part-1">
+<span class="octicon octicon-link"></span></a>اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت اول)
+</h3>
+<p dir="rtl"> استفاده از if و else  های زیاد باعث کاهش خوانایی و پیچیدگی کد میشود.خوانایی و سادگی بهتر از پیچیدگی و گیج کنندگی است</p>
 
-Too many if-else statements can make your code hard to follow. Explicit is better
-than implicit.
-
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 function isShopOpen($day): bool
@@ -249,7 +255,7 @@ function isShopOpen($day): bool
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 function isShopOpen(string $day): bool
@@ -266,11 +272,15 @@ function isShopOpen(string $day): bool
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid nesting too deeply and return early (part 2)
 
-**Bad:**
+<h3 id="avoid-nesting-too-deeply-and-return-early-part-2"  dir="rtl">
+<a class="anchor" name="avoid-nesting-too-deeply-and-return-early-part-2" href="#avoid-nesting-too-deeply-and-return-early-part-2">
+<span class="octicon octicon-link"></span></a>اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت دوم)
+</h3>
+
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 function fibonacci(int $n)
@@ -291,7 +301,7 @@ function fibonacci(int $n)
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 function fibonacci(int $n): int
@@ -308,14 +318,15 @@ function fibonacci(int $n): int
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid Mental Mapping
+<h3 id="avoid-mental-mapping"  dir="rtl">
+<a class="anchor" name="avoid-mental-mapping" href="#avoid-mental-mapping">
+<span class="octicon octicon-link"></span></a>اجتناب از نقشه ذهنی</h3>
+<p dir="rtl">کاری نکنید کسی که کد شما را میخواند بیشتر زمانش صرف این شود که معنی این متغیر چیست؟خوانایی و سادگی بهتر از پیچیدگی و گیج کنندگی است.
+</p>
 
-Don’t force the reader of your code to translate what the variable means.
-Explicit is better than implicit.
-
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 $l = ['Austin', 'New York', 'San Francisco'];
@@ -332,7 +343,7 @@ for ($i = 0; $i < count($l); $i++) {
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 $locations = ['Austin', 'New York', 'San Francisco'];
@@ -347,14 +358,16 @@ foreach ($locations as $location) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Don't add unneeded context
+<h3 id="don-t-add-unneeded-context" dir="rtl" >
+<a class="anchor" name="don-t-add-unneeded-context" href="#don-t-add-unneeded-context">
+<span class="octicon octicon-link"></span></a>محتوا غیر ضروری را اضافه نکنید</h3>
 
-If your class/object name tells you something, don't repeat that in your
-variable name.
 
-**Bad:**
+<p dir="rtl">اگر نام کلاس یا شی شما اطلاعاتی به شما میدهد لطفا آن را در نام متغیر ها تکرار نکنید.</p>
+
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 class Car
@@ -367,7 +380,7 @@ class Car
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 class Car
@@ -380,82 +393,82 @@ class Car
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Use default arguments instead of short circuiting or conditionals
-
-**Not good:**
-
-This is not good because `$breweryName` can be `NULL`.
+<h3 id="use-default-arguments-instead-of-short-circuiting-or-conditionals" dir="rtl">
+<a class="anchor" name="use-default-arguments-instead-of-short-circuiting-or-conditionals" href="#use-default-arguments-instead-of-short-circuiting-or-conditionals">
+<span class="octicon octicon-link"></span></a>استفاده از آرگومان های پیش فرض به جای short circuit یا شرط ها</h3>    
+<p dir="rtl"><strong>خوب نیست:</strong></p>
+    <p dir="rtl">این خوب نیست چون <code dir="ltr">$breweryName</code> میتواند <code>NULL</code>  باشد.</p>
 
 ```php
-function createMicrobrewery($breweryName = 'Hipster Brew Co.'): void
+function createMicrobrewery($breweryName = 'بهنوش'): void
 {
     // ...
 }
 ```
 
-**Not bad:**
-
-This opinion is more understandable than the previous version, but it better controls the value of the variable.
+<p dir="rtl"><strong>بدک نیست:</strong></p>
+<p dir="rtl">این کد قابل فهم تر از کد قبلی هست، اما بهتر است کنترل بهتری بر مقدار متغیر ها داشته باشد.</p>
 
 ```php
 function createMicrobrewery($name = null): void
 {
-    $breweryName = $name ?: 'Hipster Brew Co.';
+    $breweryName = $name ?: 'بهنوش';
     // ...
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
- You can use [type hinting](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) and be sure that the `$breweryName` will not be `NULL`.
+<p dir="rtl"> شما میتوانید از  <a href="http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration">type hinting</a> استفاده کنید  و مطمئن شوید که  <code dir="ltr">$breweryName</code> هیچ موقع <code>NULL</code> نخواهد بود</p>
 
 ```php
-function createMicrobrewery(string $breweryName = 'Hipster Brew Co.'): void
+function createMicrobrewery(string $breweryName = 'بهنوش'): void
 {
     // ...
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-## Comparison
+<h2 id="comparison" dir="rtl"><a class="anchor" name="comparison" href="#comparison"><span class="octicon octicon-link"></span></a>مقایسه</h2>
 
-### Use [identical comparison](http://php.net/manual/en/language.operators.comparison.php)
+<h3 id="use-identical-comparison" dir="rtl">
+<a class="anchor" name="use-identical-comparison" href="#use-identical-comparison">
+<span class="octicon octicon-link"></span></a>استفاده از <a href="http://php.net/manual/en/language.operators.comparison.php">identical comparison</a> </h3>
 
-**Not good:**
+<p dir="rtl"><strong>خوب نیست:</strong></p>
 
-The simple comparison will convert the string in an integer.
+<p dir="rtl">یک مقایسه ساده که یک رشته را به عدد صحیح تبدیل میکند.</p>
+
 
 ```php
 $a = '42';
 $b = 42;
 
 if ($a != $b) {
-   // The expression will always pass
+   // هر کدی اینجا باشد  اجرا تخواهد شد.
 }
 ```
 
-The comparison `$a != $b` returns `FALSE` but in fact it's `TRUE`!
-The string `42` is different than the integer `42`.
 
-**Good:**
+<p dir="rtl">مقایسه <code dir="ltr">$a != $b</code> به ما <code dir="ltr">FALSE</code> بر میگرداند اما در حقیقت باید <code dir="ltr">TRUE</code> برگرداند.چون رشته <code dir="ltr">42</code> تفاوت دارد با عدد صحیح <code dir="ltr">42</code></p>
 
-The identical comparison will compare type and value.
+<p dir="rtl"><strong>خوب :</strong></p>
+<p dir="rtl"><strong>identical comparison</strong> نوع و مقدار را مقایسه میکند.</p>
 
 ```php
 $a = '42';
 $b = 42;
 
 if ($a !== $b) {
-    // The expression is verified
+    // هر کدی اینجا باشد اجرا میشود.
 }
 ```
 
-The comparison `$a !== $b` returns `TRUE`.
-
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl">مقایسه <code dir="ltr">$a !== $b</code> به ما  <code>TRUE</code> بر میگرداند.</p>
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
 
 ## Functions
